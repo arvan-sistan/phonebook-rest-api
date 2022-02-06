@@ -1,7 +1,11 @@
 package storage
 
 import (
+	"context"
 	"errors"
+
+	"github.com/arvan-sistan/phonebook-rest-api/internal/http/request"
+	"github.com/arvan-sistan/phonebook-rest-api/internal/model"
 )
 
 var (
@@ -10,3 +14,8 @@ var (
 
 	ErrorMaxUrlCount = errors.New("user reached max url count")
 )
+
+type User interface {
+	SaveUser(context.Context, request.User) (model.User, error)
+	LoadByUserPass(context.Context, string, string) (model.User, error)
+}
